@@ -3,8 +3,8 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="product.info.addtocart.additional">
-            <block class="Roma\QuickOrder\Block\Catalog\Product\View" name="catalog.product.view.extrablock"
-                   template="Roma_QuickOrder::catalog/product/view.phtml"/>
+            <block class="Roma\QuickOrder\Block\Catalog\Product\QuickOrder" name="catalog.product.view.extrablock"
+                   template="Roma_QuickOrder::catalog/product/quickorder.phtml"/>
         </referenceBlock>
     </body>
 </page>
