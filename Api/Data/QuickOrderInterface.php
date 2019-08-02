@@ -11,6 +11,8 @@ interface QuickOrderInterface
     const EMAIL_FIELD               = 'email';
     const SKU_FIELD                 = 'sku';
     const STATUS_FIELD              = 'status';
+    const CREATE_AT_FIELD           = 'create_at';
+    const UPDATE_AT_FIELD           = 'update_at';
     const CACHE_TAG                 = 'roma_quickorder';
     const REGISTRY_KEY              = 'quickorder_quickorder';
     /**
@@ -62,5 +64,24 @@ interface QuickOrderInterface
      * @return \Roma\QuickOrder\Api\Data\QuickOrderInterface
      */
     public function setStatus($status);
+    /**
+     * @return mixed
+     */
+    public function getDateTime();
+    /**
+     * @param string $createAt
+     * @return \Roma\QuickOrder\Api\Data\QuickOrderInterface
+     */
+    public function setDateTime($createAt);
+    /**
+     * @return mixed
+     */
+    public function getUpdateDateTime();
+    /**
+     * @param string $updatedAt
+     * @return \Roma\QuickOrder\Api\Data\QuickOrderInterface
+     */
+    public function setUpdateDateTime($updatedAt);
+
 }
 

@@ -69,8 +69,28 @@ class QuickOrder extends AbstractModel implements QuickOrderInterface, IdentityI
         return $this->getData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::STATUS_FIELD);
     }
     /** {@inheritdoc} */
-    public function setStatus($email)
+    public function setStatus($status)
     {
-        return $this->setData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::STATUS_FIELD, $email);
+        return $this->setData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::STATUS_FIELD, $status);
+    }
+    /** {@inheritdoc} */
+    public function getDateTime()
+    {
+        return $this->getData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::CREATE_AT_FIELD);
+    }
+    /** {@inheritdoc} */
+    public function setDateTime($createAt)
+    {
+        return $this->setData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::CREATE_AT_FIELD, $createAt);
+    }
+    /** {@inheritdoc} */
+    public function getUpdateDateTime()
+    {
+        return $this->getData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::UPDATE_AT_FIELD);
+    }
+    /** {@inheritdoc} */
+    public function setUpdateDateTime($updatedAt)
+    {
+        return $this->setData(\Roma\QuickOrder\Api\Data\QuickOrderInterface::UPDATE_AT_FIELD, $updatedAt);
     }
 }

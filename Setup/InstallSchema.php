@@ -7,6 +7,7 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
 use Roma\QuickOrder\Api\Data\QuickOrderInterface;
+use Roma\QuickOrder\Api\Data\StatusInterface;
 
 class InstallSchema implements InstallSchemaInterface
 {
@@ -54,8 +55,45 @@ class InstallSchema implements InstallSchemaInterface
             255,
             ['nullable' => false],
             'Status'
+        )->addColumn(
+            QuickOrderInterface::CREATE_AT_FIELD,
+            Table::TYPE_TEXT,
+            255,
+            ['nullable' => false],
+            'Create At'
+        )->addColumn(
+            QuickOrderInterface::UPDATE_AT_FIELD,
+            Table::TYPE_TEXT,
+            255,
+            ['nullable' => false],
+            'Update At'
         )->setComment(
             'QuickOrder Table'
+        );
+        $installer->getConnection()->createTable($table);
+
+        $table = $installer->getConnection()->newTable(
+            $installer->getTable(StatusInterface::TABLE_NAME)
+        )->addColumn(
+            StatusInterface::ID_FIELD,
+            Table::TYPE_INTEGER,
+            null,
+            ['identity' => true, 'nullable' => false, 'primary' => true, 'unsigned'=> true],
+            'Status ID'
+        )->addColumn(
+            StatusInterface::STATUS_NAME_FIELD,
+            Table::TYPE_TEXT,
+            255,
+            ['nullable' => false],
+            'Status Name'
+        )->addColumn(
+            StatusInterface::BY_DEFAULT_FIELD,
+            Table::TYPE_BOOLEAN,
+            255,
+            ['nullable' => false],
+            'By Default'
+        )->setComment(
+            'Status Table'
         );
         $installer->getConnection()->createTable($table);
         $installer->endSetup();

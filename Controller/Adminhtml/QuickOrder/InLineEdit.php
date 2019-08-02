@@ -5,12 +5,15 @@ namespace Roma\QuickOrder\Controller\Adminhtml\QuickOrder;
 class InlineEdit extends \Magento\Backend\App\Action
 {
     protected $jsonFactory;
+    protected $date;
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
+        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+        \Magento\Framework\Stdlib\DateTime\DateTime $date
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
+        $this->date = $date;
     }
     public function execute()
     {
@@ -29,6 +32,7 @@ class InlineEdit extends \Magento\Backend\App\Action
                     $model = $this->_objectManager->create('Roma\QuickOrder\Model\QuickOrder')->load($entityId);
                     try {
                         $model->setData(array_merge($model->getData(), $postItems[$entityId]));
+                        $model->setUpdateDateTime($this->date->gmtDate());
                         $model->save();
                     } catch (\Exception $e) {
                         $messages[] = "[Error:]  {$e->getMessage()}";

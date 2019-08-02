@@ -22,5 +22,15 @@
                 action="quickorder/quickorder/listing"
                 resource="Roma_B2BCustomers::quickorder"
         />
+        <add
+                id="Roma_QuickOrder::status"
+                title="Status UI Grid"
+                translate="title"
+                module="Roma_QuickOrder"
+                sortOrder="10"
+                parent="Roma_QuickOrder::all"
+                action="quickorder/quickorder/status"
+                resource="Roma_B2BCustomers::status"
+        />
     </menu>
 </config>
