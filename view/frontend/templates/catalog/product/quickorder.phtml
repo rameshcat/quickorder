@@ -12,10 +12,8 @@ $sku = $block->getProduct()->getSku();
     </button>
 </div>
 <div class="quick-order-popup" id="quick-order-popup">
-    <form>
-
-    </form>
-    <form action="quickorder" method="post" data-mage-init='{"validation":{}}'>
+    <form></form>
+    <form id="qoform" name="myform" action="quickorder" method="post" data-mage-init='{"validation":{}}'>
         <fieldset class="fieldset">
             <div class="field name required">
                 <label class="label"><span>Name</span></label>
@@ -38,9 +36,7 @@ $sku = $block->getProduct()->getSku();
                     <input data-validate='{"email2":true}' name="email" value="" type="text" class="input-text"/>
                 </div>
             </div>
-            <input type="text" name="sku" value="<?php echo $sku ?? '';?>">
-            <input style="width: 76.8px; height: 32px; margin-top: 25px; position: absolute; right: 30px; border-radius: 3px"
-                   class="action tocart primary" type="submit" value="Send">
+            <input type="hidden" name="sku" value="<?php echo $sku ?? '';?>">
         </fieldset>
     </form>
 </div>
@@ -50,7 +46,6 @@ $sku = $block->getProduct()->getSku();
         'jquery',
         'Magento_Ui/js/modal/modal'
     ], function ($, modal) {
-
         var options = {
             type: 'popup',
             responsive: true,
@@ -60,24 +55,16 @@ $sku = $block->getProduct()->getSku();
                 text: $.mage.__('Cancel'),
                 class: 'action tocart primary',
                 attr: {},
-                action: 'action.php',
-                click: function (event) {
-                    this.closeModal(event);
-                }
-            },
+                click: function submitform()
                 {
-                    text: $.mage.__('Confirm'),
-                    class: 'action tocart primary',
-                    attr: {},
-                    click: function (event) {
-                        this.closeModal(event);
-                    }
-                }]
+                    $('#qoform').submit();
+                }
+            }]
         };
-        var slide = modal(options, $('#quick-order-popup'));
+
+        modal(options, $('#quick-order-popup'));
 
         $('.quick-order button').on('click', function () {
-
             $('#quick-order-popup').modal('openModal');
             return false;
         });

@@ -7,23 +7,21 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Index extends BaseAction
 {
-    protected $question;
+    protected $model;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Roma\QuickOrder\Model\QuickOrder $question
+        \Roma\QuickOrder\Model\QuickOrder $model
     ) {
-        $this->question = $question;
+        $this->model = $model;
         parent::__construct($context);
     }
     public function execute()
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $data = $this->getRequest()->getPostValue();
-        //$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        //$question = $objectManager->create('Roma\QuickOrder\Model\QuickOrder');
-        $this->question->setData($data);
-        $this->question->save();
+        $this->model->setData($data);
+        $this->model->save();
         $resultRedirect->setUrl($this->_redirect->getRefererUrl());
         return $resultRedirect;
     }
