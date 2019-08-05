@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="roma_quickorder" translate="label" sortOrder="1000">
+            <label>Quick Order Status</label>
+        </tab>
+        <section id="quickorder" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Quick Order Status</label>
+            <tab>roma_quickorder</tab>
+            <resource>Roma_Quickorder::system_config</resource>
+            <group
+                    id="general"
+                    translate="label"
+                    type="text"
+                    sortOrder="10"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+            >
+                <label>Default Status Selection</label>
+                <field
+                        id="by_default"
+                        translate="label"
+                        type="select"
+                        sortOrder="10"
+                        showInDefault="1"
+                        showInWebsite="1"
+                        showInStore="1"
+                >
+                    <label>Default Status</label>
+                    <source_model>Roma\QuickOrder\UI\Component\Listing\Status\Status</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
