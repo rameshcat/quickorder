@@ -40,39 +40,36 @@
             <submitUrl path="quickorder" />
         </settings>
     </dataSource>
-
     <fieldset name="general">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="label" xsi:type="string" translate="true">General</item>
+                <item name="label" xsi:type="string" translate="true">Statuses</item>
                 <item name="sortOrder" xsi:type="number">20</item>
                 <item name="opened" xsi:type="boolean">true</item>
             </item>
         </argument>
-
         <field name="status_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">false</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">b2bcustomers</item>
-                    <item name="dataScope" xsi:type="string">customer_id</item>
+                    <item name="source" xsi:type="string">quickorder</item>
+                    <item name="dataScope" xsi:type="string">status_id</item>
                 </item>
             </argument>
         </field>
-
         <field name="status_name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string">First Name</item>
+                    <item name="label" xsi:type="string">Status Name</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">b2bcustomers</item>
+                    <item name="source" xsi:type="string">quickorder</item>
                     <item name="require" xsi:type="boolean">true</item>
-                    <item name="dataScope" xsi:type="string">first_name</item>
+                    <item name="dataScope" xsi:type="string">status_name</item>
                 </item>
             </argument>
             <settings>
@@ -81,17 +78,16 @@
                 </validation>
             </settings>
         </field>
-
         <field name="by_default">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string">Last Name</item>
+                    <item name="label" xsi:type="string">By default</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">b2bcustomers</item>
+                    <item name="source" xsi:type="string">quickorder</item>
                     <item name="require" xsi:type="boolean">true</item>
-                    <item name="dataScope" xsi:type="string">last_name</item>
+                    <item name="dataScope" xsi:type="string">by_default</item>
                 </item>
             </argument>
             <settings>
@@ -100,6 +96,5 @@
                 </validation>
             </settings>
         </field>
-
     </fieldset>
 </form>

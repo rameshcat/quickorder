@@ -62,7 +62,7 @@ $sku = $block->getProduct()->getSku();
             }]
         };
 
-        modal(options, $('#quick-order-popup'));
+        var popup = modal(options, $('#quick-order-popup'));
 
         $('.quick-order button').on('click', function () {
             $('#quick-order-popup').modal('openModal');

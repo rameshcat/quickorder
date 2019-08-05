@@ -14,7 +14,7 @@ interface StatusInterface
     /**
      * @return mixed
      */
-    public function getStatusId();
+    public function getId();
 
     /**
      * @return mixed

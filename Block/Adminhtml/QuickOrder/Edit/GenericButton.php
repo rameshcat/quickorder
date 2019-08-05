@@ -12,6 +12,7 @@ class GenericButton
     protected $context;
     /** @var StatusRepositoryInterface */
     protected $repository;
+
     public function __construct(
         Context $context,
         StatusRepositoryInterface $repository

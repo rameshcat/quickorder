@@ -24,7 +24,6 @@ class Index extends BaseAction
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $data = $this->getRequest()->getParams();
-        //var_dump($data);die;
         $this->model->setData($data);
         $this->model->setStatus('default');
         $this->model->setDateTime($this->date->gmtDate());
@@ -32,6 +31,7 @@ class Index extends BaseAction
 
         $this->model->save();
         $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+
         return $resultRedirect;
     }
 }

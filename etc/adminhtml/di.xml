@@ -7,10 +7,17 @@
                 type="Roma\QuickOrder\Model\QuickOrderRepository" />
     <preference for="Roma\QuickOrder\Api\Data\QuickOrderSearchResultsInterface"
                 type="Magento\Framework\Api\SearchResults" />
+    <preference for="Roma\QuickOrder\Api\Data\StatusInterface"
+                type="Roma\QuickOrder\Model\Status" />
+    <preference for="Roma\QuickOrder\Api\StatusRepositoryInterface"
+                type="Roma\QuickOrder\Model\StatusRepository" />
+    <preference for="Roma\QuickOrder\Api\Data\StatusSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="quickorder_grid_listing_data_source" xsi:type="string">Roma\QuickOrder\Model\ResourceModel\QuickOrder\Grid\Collection</item>
+                <item name="quickorder_form_data_source" xsi:type="string">Roma\QuickOrder\Model\ResourceModel\Status\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
