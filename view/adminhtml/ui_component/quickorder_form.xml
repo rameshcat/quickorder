@@ -37,7 +37,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="quickorder" />
+            <submitUrl path="quickorder/quickorder/save" />
         </settings>
     </dataSource>
     <fieldset name="general">
