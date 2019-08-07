@@ -6,14 +6,14 @@
             <block class="Roma\QuickOrder\Block\Catalog\Product\QuickOrder" name="catalog.product.view.extrablock"
                    template="Roma_QuickOrder::catalog/product/quickorder.phtml"/>
         </referenceBlock>
-        <referenceBlock name="product.info.addtocart">
+<!--        <referenceBlock name="product.info.addtocart">
             <block class="Roma\QuickOrder\Block\Catalog\Product\QuickOrder" name="catalog.product.view.myextrablock"
                    template="Roma_QuickOrder::catalog/product/quickorder.phtml"/>
-        </referenceBlock>
-        <referenceBlock name="product.info.addtocart.bundle">
+        </referenceBlock>-->
+<!--        <referenceBlock name="product.info.addtocart.bundle">
             <block class="Roma\QuickOrder\Block\Catalog\Product\QuickOrder" name="catalog.product.view.mynewextrablock"
                    template="Roma_QuickOrder::catalog/product/quickorder.phtml"/>
-        </referenceBlock>
+        </referenceBlock>-->
 
     </body>
 </page>

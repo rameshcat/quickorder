@@ -108,7 +108,8 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
 
                                                 <button type="submit"
                                                         title="<?= $block->escapeHtml(__('QuickOrder')) ?>"
-                                                        class="action primary qo">
+                                                        class="action primary qo"
+                                                        style="margin-top: 5px">
                                                     <span><?= /* @escapeNotVerified */
                                                         __('QuickOrder') ?></span>
                                                 </button>
@@ -161,7 +162,6 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
         }
         </script>
 <div class="quick-order-popup" id="quick-order-popup">
-    <form></form>
     <form id="qoform" name="myform" action="/quickorder" method="post" data-mage-init='{"validation":{}}'>
         <fieldset class="fieldset">
             <div class="field name required">
@@ -185,7 +185,8 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
                     <input data-validate='{"email2":true}' name="email" value="" type="text" class="input-text"/>
                 </div>
             </div>
-            <input type="text" name="sku" value="<?php echo $block->escapeHtml($_product->getSku()) ?? '';?>">
+            <input type="hidden" id="sku-field" type="text" name="sku">
+            <input id='q-o-b' style="margin-top: 30px; right: 30px" type="submit" class="action primary" value="Send">
         </fieldset>
     </form>
 </div>
@@ -200,23 +201,33 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
             responsive: true,
             innerScroll: true,
             title: '<?php echo __('Fill in the fields, please!'); ?>',
-            buttons: [{
-                text: $.mage.__('Send'),
-                class: 'action tocart primary',
-                attr: {},
-                click: function submitform()
-                {
-                    $('#qoform').submit();
-                }
-            }]
+            buttons: []
         };
 
         var popup = modal(options, $('#quick-order-popup'));
 
         $('.qo').on('click', function () {
+            $('#sku-field').attr("value",$(this).parent().data('product-sku'));
             $('#quick-order-popup').modal('openModal');
             return false;
         });
+
+        $('body').on('submit', '#qoform', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/quickorder',
+                method: 'post',
+                data: $(e.target).serialize(),
+                context: this,
+                afterSend: $("#q-o-b").prop('disabled', true),
+                success:function(event) {
+                    $("#q-o-b").prop('disabled', false);
+                    popup.closeModal(event);
+                }
+            });
+            return false;
+        });
+
     });
 </script>
 

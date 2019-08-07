@@ -1,17 +1,13 @@
 <?php
 $sku = $block->getProduct()->getSku();
 ?>
-<style>
-    .quick-order-popup {
-        display: none;
-    }
-</style>
+
 <div class="quick-order">
-    <button type="submit" title="QuickOrder" class="action tocart primary">
+    <button type="submit" title="QuickOrder" class="action primary">
         <span>Quick Order</span>
     </button>
 </div>
-<div class="quick-order-popup" id="quick-order-popup">
+<div style="display: none" class="quick-order-popup" id="quick-order-popup">
     <form></form>
     <form id="qoform" name="myform" action="quickorder" method="post" data-mage-init='{"validation":{}}'>
         <fieldset class="fieldset">
@@ -37,6 +33,7 @@ $sku = $block->getProduct()->getSku();
                 </div>
             </div>
             <input type="hidden" name="sku" value="<?php echo $sku ?? '';?>">
+            <input id='q-o-b' style="margin-top: 30px; right: 30px" type="submit" class="action primary" value="Send">
         </fieldset>
     </form>
 </div>
@@ -50,16 +47,8 @@ $sku = $block->getProduct()->getSku();
             type: 'popup',
             responsive: true,
             innerScroll: true,
-            title: '<?php echo __('Fill in the fields, please!'); ?>',
-            buttons: [{
-                text: $.mage.__('Send'),
-                class: 'action tocart primary',
-                attr: {},
-                click: function submitform()
-                {
-                    $('#qoform').submit();
-                }
-            }]
+            title: '<?php echo __('Fill in'); ?>',
+            buttons: []
         };
 
         var popup = modal(options, $('#quick-order-popup'));
@@ -68,5 +57,22 @@ $sku = $block->getProduct()->getSku();
             $('#quick-order-popup').modal('openModal');
             return false;
         });
+        $('body').on('submit', '#qoform', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/quickorder',
+                method: 'post',
+                data: $(e.target).serialize(),
+                context: this,
+                afterSend: $("#q-o-b").prop('disabled', true),
+                success:function(event) {
+                    $("#q-o-b").prop('disabled', false);
+                    popup.closeModal(event);
+                },
+            });
+            return false;
+        });
+
+
     });
 </script>
