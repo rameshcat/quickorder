@@ -1,15 +1,11 @@
-<?php
-$sku = $block->getProduct()->getSku();
-?>
-
 <div class="quick-order">
-    <button type="submit" title="QuickOrder" class="action primary">
+    <button id="quick-order-button" type="submit" title="QuickOrder" class="action primary">
         <span>Quick Order</span>
     </button>
 </div>
 <div style="display: none" class="quick-order-popup" id="quick-order-popup">
     <form></form>
-    <form id="qoform" name="myform" action="quickorder" method="post" data-mage-init='{"validation":{}}'>
+    <form id="qoform" name="myform" action="" method="post" data-mage-init='{"validation":{}}'>
         <fieldset class="fieldset">
             <div class="field name required">
                 <label class="label"><span>Name</span></label>
@@ -32,7 +28,7 @@ $sku = $block->getProduct()->getSku();
                     <input data-validate='{"email2":true}' name="email" value="" type="text" class="input-text"/>
                 </div>
             </div>
-            <input type="hidden" name="sku" value="<?php echo $sku ?? '';?>">
+            <input id="sku-field" type="hidden" name="sku" value="<?php echo $sku ?? ''; ?>">
             <input id='q-o-b' style="margin-top: 30px; right: 30px" type="submit" class="action primary" value="Send">
         </fieldset>
     </form>
@@ -53,26 +49,32 @@ $sku = $block->getProduct()->getSku();
 
         var popup = modal(options, $('#quick-order-popup'));
 
-        $('.quick-order button').on('click', function () {
+        $('.quick-order-button').on('click', function () {
+            $('#sku-field').attr("value", $('#product_addtocart_form').data('product-sku'));
             $('#quick-order-popup').modal('openModal');
             return false;
         });
         $('body').on('submit', '#qoform', function (e) {
             e.preventDefault();
             $.ajax({
-                url: '/quickorder',
+                url: "<?= $block->getUrl('quickorder/save') ?>",
                 method: 'post',
                 data: $(e.target).serialize(),
                 context: this,
                 afterSend: $("#q-o-b").prop('disabled', true),
-                success:function(event) {
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 500) {
+                        alert('Internal error: ' + jqXHR.responseJSON.message);
+                    } else {
+                        alert('Unexpected error.');
+                    }
+                },
+                success: function (event) {
                     $("#q-o-b").prop('disabled', false);
                     popup.closeModal(event);
-                },
+                }
             });
             return false;
         });
-
-
     });
 </script>
