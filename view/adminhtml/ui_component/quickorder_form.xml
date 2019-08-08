@@ -78,23 +78,5 @@
                 </validation>
             </settings>
         </field>
-        <field name="by_default">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string">By default</item>
-                    <item name="visible" xsi:type="boolean">true</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">quickorder</item>
-                    <item name="require" xsi:type="boolean">true</item>
-                    <item name="dataScope" xsi:type="string">by_default</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-            </settings>
-        </field>
     </fieldset>
 </form>

@@ -86,12 +86,6 @@ class InstallSchema implements InstallSchemaInterface
             255,
             ['nullable' => false],
             'Status Name'
-        )->addColumn(
-            StatusInterface::BY_DEFAULT_FIELD,
-            Table::TYPE_BOOLEAN,
-            255,
-            ['nullable' => false],
-            'By Default'
         )->setComment(
             'Status Table'
         );

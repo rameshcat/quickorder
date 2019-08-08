@@ -32,19 +32,7 @@ class Status extends AbstractModel implements StatusInterface, IdentityInterface
     public function setStatusName($statusName)
     {
         $this->setData(\Roma\QuickOrder\Api\Data\StatusInterface::STATUS_NAME_FIELD, $statusName);
-        return $this;
-    }
 
-    /** {@inheritdoc} */
-    public function getByDefault()
-    {
-        return $this->getData(\Roma\QuickOrder\Api\Data\StatusInterface::BY_DEFAULT_FIELD);
-    }
-
-    /** {@inheritdoc} */
-    public function setByDefault($byDefault)
-    {
-        $this->setData(\Roma\QuickOrder\Api\Data\StatusInterface::BY_DEFAULT_FIELD, $byDefault);
         return $this;
     }
 }
