@@ -12,13 +12,16 @@ class Index extends BaseAction
 {
     protected $saver;
     protected $jsonFactory;
+    protected $messageManager;
 
     public function __construct(
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\Message\ManagerInterface $messageManager,
         \Roma\QuickOrder\Model\QuickOrderSaver $saver
     )
     {
+        $this->messageManager = $messageManager;
         $this->saver = $saver;
         $this->jsonFactory = $jsonFactory;
         parent::__construct($context);
@@ -34,7 +37,7 @@ class Index extends BaseAction
         } catch (\Throwable $th) {
             return $result->setStatusHeader(500)->setData(['message' => $th->getMessage()]);
         };
-
+        $this->messageManager->addSuccess(__("Your order successfully added"));
         return $result->setData(['message' => 'success']);
     }
 }

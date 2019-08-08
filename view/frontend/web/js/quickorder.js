@@ -30,9 +30,12 @@ define([
             data: $(e.target).serialize(),
             context: this,
             afterSend: $("#quick-order-submit").prop('disabled', true),
+            beforeSend: function(){if ($('.error').length) {
+                $('.error').remove()}},
             error: function (jqXHR, textStatus, errorThrown) {
                 if (jqXHR.status == 500) {
-                    alert('Internal error: ' + jqXHR.responseJSON.message);
+                    $("#quick-order-submit").before( $("<div class='error'>"+jqXHR.responseJSON.message+"</div>") );
+                    $("#quick-order-submit").prop('disabled', false);
                 } else {
                     alert('Unexpected error.');
                 }
