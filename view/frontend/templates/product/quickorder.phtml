@@ -1,80 +1,10 @@
 <div class="quick-order">
-    <button id="quick-order-button" type="submit" title="QuickOrder" class="action primary">
-        <span>Quick Order</span>
+    <button
+            type="button"
+            title="<?= $block->escapeHtml(__('QuickOrder')) ?>"
+            class="action primary quick-order-button"
+            data-product-sku="<?= $block->getProduct()->getSku() ?>">
+<span><?= /* @escapeNotVerified */
+    __('QuickOrder') ?></span>
     </button>
 </div>
-<div style="display: none" class="quick-order-popup" id="quick-order-popup">
-    <form></form>
-    <form id="qoform" name="myform" action="" method="post" data-mage-init='{"validation":{}}'>
-        <fieldset class="fieldset">
-            <div class="field name required">
-                <label class="label"><span>Name</span></label>
-                <div class="control">
-                    <input data-validate='{"required":true}' name="name" value="" class="input-text" type="text"/>
-                </div>
-            </div>
-            <div class="field name required">
-                <label class="label"><span>Phone</span></label>
-                <div class="control">
-                    <input data-validate='{"required":true ,
-                                              "validate-digits":true ,
-                                              "minlength":10 }'
-                           name="phone" value="" class="input-text" type="text"/>
-                </div>
-            </div>
-            <div>
-                <label class="label"><span>E-mail</span></label>
-                <div class="control">
-                    <input data-validate='{"email2":true}' name="email" value="" type="text" class="input-text"/>
-                </div>
-            </div>
-            <input id="sku-field" type="hidden" name="sku" value="<?php echo $sku ?? ''; ?>">
-            <input id='q-o-b' style="margin-top: 30px; right: 30px" type="submit" class="action primary" value="Send">
-        </fieldset>
-    </form>
-</div>
-
-<script>
-    require([
-        'jquery',
-        'Magento_Ui/js/modal/modal'
-    ], function ($, modal) {
-        var options = {
-            type: 'popup',
-            responsive: true,
-            innerScroll: true,
-            title: '<?php echo __('Fill in'); ?>',
-            buttons: []
-        };
-
-        var popup = modal(options, $('#quick-order-popup'));
-
-        $('.quick-order-button').on('click', function () {
-            $('#sku-field').attr("value", $('#product_addtocart_form').data('product-sku'));
-            $('#quick-order-popup').modal('openModal');
-            return false;
-        });
-        $('body').on('submit', '#qoform', function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "<?= $block->getUrl('quickorder/save') ?>",
-                method: 'post',
-                data: $(e.target).serialize(),
-                context: this,
-                afterSend: $("#q-o-b").prop('disabled', true),
-                error: function (jqXHR, textStatus, errorThrown) {
-                    if (jqXHR.status == 500) {
-                        alert('Internal error: ' + jqXHR.responseJSON.message);
-                    } else {
-                        alert('Unexpected error.');
-                    }
-                },
-                success: function (event) {
-                    $("#q-o-b").prop('disabled', false);
-                    popup.closeModal(event);
-                }
-            });
-            return false;
-        });
-    });
-</script>
