@@ -42,5 +42,15 @@
                 action="admin/system_config/edit/section/quickorder"
                 resource="Roma_QuickOrder::system_config"
         />
+        <add
+                id="Roma_QuickOrder::statusListing"
+                title="Statuses"
+                translate="title"
+                module="Roma_QuickOrder"
+                sortOrder="20"
+                parent="Roma_QuickOrder::all"
+                action="quickorder/status/listing"
+                resource="Roma_B2BCustomers::statusListing"
+        />
     </menu>
 </config>
