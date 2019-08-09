@@ -20,14 +20,12 @@ class Status implements \Magento\Framework\Data\OptionSourceInterface
      */
     public function toOptionArray()
     {
-        $myReturn = array();
         $collection = $this->collectionFactory->create();
         $items = $collection->getData();
         foreach ($items as $item){
-            $arr =  ['value' => $item['status_id'],'label' => $item['status_name']];
-            $myReturn[] = $arr;
+            $optionArray[] =  ['value' => $item['status_id'],'label' => $item['status_name']];
         }
 
-        return $myReturn;
+        return $optionArray;
     }
 }

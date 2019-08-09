@@ -5,8 +5,6 @@ namespace Roma\QuickOrder\Controller\Save;
 use Magento\Framework\App\Action\Action as BaseAction;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultFactory;
-use mysql_xdevapi\Exception;
-
 
 class Index extends BaseAction
 {
