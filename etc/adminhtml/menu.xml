@@ -8,13 +8,13 @@
                 title="Quick Order"
                 translate="title"
                 module="Roma_QuickOrder"
-                sortOrder="30"
+                sortOrder="10"
                 dependsOnModule="Roma_QuickOrder"
                 resource="Roma_QuickOrder::all"
         />
         <add
                 id="Roma_QuickOrder::quickorder"
-                title="Quick Order UI Grid"
+                title="Quick Orders"
                 translate="title"
                 module="Roma_QuickOrder"
                 sortOrder="10"
@@ -24,10 +24,10 @@
         />
         <add
                 id="Roma_QuickOrder::status"
-                title="Status UI Grid"
+                title="Create New Status"
                 translate="title"
                 module="Roma_QuickOrder"
-                sortOrder="10"
+                sortOrder="30"
                 parent="Roma_QuickOrder::all"
                 action="quickorder/quickorder/status"
                 resource="Roma_B2BCustomers::status"
@@ -37,7 +37,7 @@
                 title="Default Status Selection"
                 translate="title"
                 module="Roma_QuickOrder"
-                sortOrder="20"
+                sortOrder="40"
                 parent="Roma_QuickOrder::all"
                 action="admin/system_config/edit/section/quickorder"
                 resource="Roma_QuickOrder::system_config"
