@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Roma\QuickOrder\Setup;
 
 use Psr\Log\LoggerInterface;
@@ -11,26 +10,29 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\DB\Transaction;
 use Magento\Framework\DB\TransactionFactory;
 
-use Roma\QuickOrder\Model\Status;
-use Roma\QuickOrder\Model\StatusFactory;
+use Roma\QuickOrder\Api\Data\StatusInterface;
+use Roma\QuickOrder\Api\Data\StatusInterfaceFactory;
 
 class InstallData implements InstallDataInterface
 {
-    /** @var StatusFactory  */
-    private $statusFactory;
+    /** @var StatusInterfaceFactory */
+    private $statusInterfaceFactory;
     /** @var TransactionFactory */
     private $transactionFactory;
     /** LoggerInterface */
     private $logger;
+
     public function __construct(
-        StatusFactory $statusFactory,
+        StatusInterfaceFactory $statusInterfaceFactory,
         TransactionFactory $transactionFactory,
         LoggerInterface $logger
-    ) {
-        $this->statusFactory        = $statusFactory;
-        $this->transactionFactory   = $transactionFactory;
-        $this->logger               = $logger;
+    )
+    {
+        $this->statusInterfaceFactory = $statusInterfaceFactory;
+        $this->transactionFactory = $transactionFactory;
+        $this->logger = $logger;
     }
+
     /** {@inheritdoc} */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
@@ -42,9 +44,9 @@ class InstallData implements InstallDataInterface
             'Approved',
             'Decline'
         ];
-        /** @var Status $status */
+        /** @var StatusInterface $status */
         foreach ($statuses as $value) {
-            $status = $this->statusFactory->create();
+            $status = $this->statusInterfaceFactory->create();
             $status->setStatusName("$value");
             $transactionalModel->addObject($status);
         }
